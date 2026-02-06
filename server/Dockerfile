@@ -1,6 +1,9 @@
-FROM eclipse-temurin:17-jdk-jammy
-ARG JAR_FILE=target/*.jar
+FROM node:18-alpine
 WORKDIR /app
-COPY ${JAR_FILE} app.jar
+COPY package*.json ./
+RUN npm ci --only=production
+COPY . .
+RUN npx prisma generate
+RUN chmod +x ./start.sh || true
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","/app/app.jar"]
+CMD ["sh","./start.sh"]

@@ -28,9 +28,8 @@ services:
     ports:
       - "8080:8080"
     environment:
-      DB_USERNAME: root
-      DB_PASSWORD: rootpass
-      JDBC_DATABASE_URL: jdbc:mysql://mysql:3306/appdb?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      DATABASE_URL: mysql://root:rootpass@mysql:3306/appdb
+      # optional: JWT_SECRET, PORT
       SERVER_PORT: 8080
     depends_on:
       mysql:
